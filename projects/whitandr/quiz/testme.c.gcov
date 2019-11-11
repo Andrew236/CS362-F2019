@@ -1,0 +1,93 @@
+        -:    0:Source:testme.c
+        -:    0:Graph:testme.gcno
+        -:    0:Data:testme.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1://Andrew White Random testing quiz
+        -:    2://software engineering 2
+        -:    3://11/10/19
+        -:    4://In this implementation I had to create random generators that eventually would pass the tester
+        -:    5://in this first function I essentially just created a random charter generator that iterates through numbers charverters
+        -:    6://symobls
+        -:    7:// in the second funtion I will explain down below
+        -:    8:
+        -:    9:
+        -:   10:
+        -:   11:
+        -:   12:
+        -:   13:
+        -:   14:#include<stdio.h>
+        -:   15:#include<string.h>
+        -:   16:#include<stdlib.h>
+        -:   17:#include<time.h>
+        -:   18:
+   745643:   19:char inputChar()
+        -:   20:{
+        -:   21:  //0 to 93.  Adding 32 would bring it to 32(space) and 125(})
+        -:   22: //char randomletter = "123456789<>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz[(*&^%$#@!{|})]"[random () % 68];
+        -:   23://return randomletter;
+        -:   24:
+   745643:   25:char random = (rand() % 94) + 32;         // random charevet from asc11 numbers and symbols as well
+   745643:   26:    return random;                        //returns the rand charcter
+        -:   27: }
+        -:   28:
+        -:   29:
+   745643:   30:char *inputString()
+        -:   31:{
+        -:   32:
+        -:   33:
+        -:   34:
+        -:   35:char string[6];             //assing a charecter array to 6
+        -:   36:int x;                      //iterator
+        -:   37:
+  4473858:   38:for(x=0;x<5;x++){           //for loop that makes sure to loop 5 times to generate 5 chars
+        -:   39:
+  3728215:   40:  string[x] = "abcdefgrstvwz\0"[random()%13];        //takes charecter array of 6 letters and randomizes them till we get reset
+        -:   41:}
+        -:   42:
+   745643:   43:return string;                              // returns the string
+        -:   44:}
+        -:   45:
+        -:   46:
+        -:   47:
+        -:   48:
+        2:   49:void testme()
+        -:   50:{
+        2:   51:  int tcCount = 0;
+        -:   52:  char *s;
+        -:   53:  char c;
+        2:   54:  int state = 0;
+        -:   55:  while (1)
+        -:   56:  {
+   745643:   57:    tcCount++;
+   745643:   58:    c = inputChar();
+   745643:   59:    s = inputString();
+   745643:   60:    printf("Iteration %d: c = %c, s = %s, state = %d\n", tcCount, c, s, state);
+        -:   61:
+   745643:   62:    if (c == '[' && state == 0) state = 1;
+   745643:   63:    if (c == '(' && state == 1) state = 2;
+   745643:   64:    if (c == '{' && state == 2) state = 3;
+   745643:   65:    if (c == ' '&& state == 3) state = 4;
+   745643:   66:    if (c == 'a' && state == 4) state = 5;
+   745643:   67:    if (c == 'x' && state == 5) state = 6;
+   745643:   68:    if (c == '}' && state == 6) state = 7;
+   745643:   69:    if (c == ')' && state == 7) state = 8;
+   745643:   70:    if (c == ']' && state == 8) state = 9;
+   745643:   71:    if (s[0] == 'r' && s[1] == 'e'
+     4387:   72:       && s[2] == 's' && s[3] == 'e'
+       32:   73:       && s[4] == 't' && s[5] == '\0'
+        2:   74:       && state == 9)
+        -:   75:    {
+        2:   76:      printf("error ");
+        2:   77:      exit(200);
+        -:   78:    }
+   745641:   79:  }
+        -:   80:}
+        -:   81:
+        -:   82:
+        2:   83:int main(int argc, char *argv[])
+        -:   84:{
+        2:   85:    srand(time(NULL));
+        2:   86:    testme();
+    #####:   87:    return 0;
+        -:   88:}
